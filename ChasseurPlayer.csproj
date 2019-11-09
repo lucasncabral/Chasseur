@@ -621,6 +621,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Scripts\Animals\AnimalsController.cs" />
+    <Compile Include="Assets\Scripts\Animals\IDamageable.cs" />
+    <Compile Include="Assets\Scripts\Animals\LivingEntity.cs" />
     <Compile Include="Assets\Scripts\Gun\Gun.cs" />
     <Compile Include="Assets\Scripts\Gun\GunController.cs" />
     <Compile Include="Assets\Scripts\Gun\Projectile.cs" />

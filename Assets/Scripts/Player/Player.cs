@@ -11,8 +11,9 @@ public class Player : MonoBehaviour {
 	PlayerController controller;
     GunController gunController;
 
-    void Start () {
-		controller = GetComponent<PlayerController> ();
+    //public override void Start () {
+    void Start()
+    {   controller = GetComponent<PlayerController> ();
         gunController = GetComponent<GunController>();
         viewCamera = Camera.main;
 	}
