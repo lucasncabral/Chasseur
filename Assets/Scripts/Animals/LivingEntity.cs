@@ -9,14 +9,21 @@ public class LivingEntity : MonoBehaviour, IDamageable
     protected bool dead;
 
     public event System.Action OnDeath;
-
+    public ParticleSystem deathEffect;
+    
     protected virtual void Start()
     {
         health = startingHealth;
         OnDeath +=  ((AnimalsController)FindObjectOfType(typeof(AnimalsController))).OnAnimalDeath;
     }
 
-    public void TakeHit(float damage, RaycastHit hit)
+    public virtual void TakeHit(float damage, Vector3 hitPoint, Vector3 hitDirection)
+    {
+        Destroy(Instantiate(deathEffect.gameObject, hitPoint, Quaternion.FromToRotation(Vector3.forward, hitDirection)) as GameObject, deathEffect.startLifetime);
+        TakeDamage(damage);
+    }
+
+    public virtual void TakeDamage(float damage)
     {
         health -= damage;
 

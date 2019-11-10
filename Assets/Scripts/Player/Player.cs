@@ -10,12 +10,14 @@ public class Player : MonoBehaviour {
 	Camera viewCamera;
 	PlayerController controller;
     GunController gunController;
+    public bool aiming;
 
     //public override void Start () {
     void Start()
     {   controller = GetComponent<PlayerController> ();
         gunController = GetComponent<GunController>();
         viewCamera = Camera.main;
+        aiming = false;
 	}
 
 	void Update () {
@@ -31,14 +33,30 @@ public class Player : MonoBehaviour {
 		if (groundPlane.Raycast(ray,out rayDistance)) {
 			Vector3 point = ray.GetPoint(rayDistance);
 			Debug.DrawLine(ray.origin,point,Color.red);
-			//Debug.DrawRay(ray.origin,ray.direction * 100,Color.red);
-			controller.LookAt(point);
+            //Debug.DrawRay(ray.origin,ray.direction * 100,Color.red);
+            
+            if (aiming)
+            {
+                controller.LookAt(point);
+            } else
+            {
+                controller.LookAt(transform.position + moveVelocity);
+            }
 		}
 
         // Weapon input
         if (Input.GetMouseButton(0))
         {
-            gunController.Shoot();
+            if(aiming)
+                gunController.Shoot();
+        } 
+
+        if (Input.GetMouseButtonDown(1))
+        {
+            aiming = true;
+        } else if (Input.GetMouseButtonUp(1))
+        {
+            aiming = false;
         }
     }
 }
