@@ -48,13 +48,21 @@ public class Player : MonoBehaviour {
         if (Input.GetMouseButton(0))
         {
             if(aiming)
-                gunController.Shoot();
-        } 
+                gunController.OnTriggerHold();
+        }
+
+        if (Input.GetMouseButtonUp(0))
+        {
+            if (aiming)
+                gunController.OnTriggerRelease();
+        }
 
         if (Input.GetMouseButtonDown(1))
         {
             aiming = true;
-        } else if (Input.GetMouseButtonUp(1))
+        }
+
+        if (Input.GetMouseButtonUp(1))
         {
             aiming = false;
         }
