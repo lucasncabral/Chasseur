@@ -9,6 +9,7 @@ public class Player : MonoBehaviour {
 	public float moveSpeed = 5;
 
 	Camera viewCamera;
+    public Camera shootCamera;
 	PlayerController controller;
     GunController gunController;
     FieldOfView playerFOV;
@@ -27,8 +28,12 @@ public class Player : MonoBehaviour {
     private void FixedUpdate()
     {
         Vector3 position = this.transform.position;
-        position += new Vector3(0f, 15.35f, -13.71f);
-        viewCamera.transform.position = position;
+
+        Vector3 shootCam = position + new Vector3();
+        shootCamera.transform.position = position + new Vector3(0, 14.25f, 0f);
+        
+        Vector3 camPosition = position + new Vector3(0f, 15.35f, -13.71f);
+        viewCamera.transform.position = camPosition;
     }
 
     void Update () {
@@ -38,7 +43,7 @@ public class Player : MonoBehaviour {
 		controller.Move (moveVelocity);
 
         // Look input
-		Ray ray = viewCamera.ScreenPointToRay (Input.mousePosition);
+		Ray ray = shootCamera.ScreenPointToRay (Input.mousePosition);
 		Plane groundPlane = new Plane (Vector3.up, Vector3.zero);
 		float rayDistance;
 		if (groundPlane.Raycast(ray,out rayDistance)) {
