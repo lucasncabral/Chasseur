@@ -64,7 +64,6 @@ public class Gun : MonoBehaviour
                     float random = (Random.Range(-currentAngle, currentAngle) / 100);
                     //float random = 0.25f;
                     direction.y = direction.y + random;
-                    Debug.Log(direction);
                 }
 
                 Projectile newProjectile = Instantiate(projectile, projectileSpawn[i].position, direction) as Projectile;

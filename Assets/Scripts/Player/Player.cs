@@ -24,7 +24,14 @@ public class Player : MonoBehaviour {
         aiming = false;
 	}
 
-	void Update () {
+    private void FixedUpdate()
+    {
+        Vector3 position = this.transform.position;
+        position += new Vector3(0f, 15.35f, -13.71f);
+        viewCamera.transform.position = position;
+    }
+
+    void Update () {
         // Movement input
 		Vector3 moveInput = new Vector3 (Input.GetAxisRaw ("Horizontal"), 0, Input.GetAxisRaw ("Vertical"));
 		Vector3 moveVelocity = moveInput.normalized * moveSpeed;
