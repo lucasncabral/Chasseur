@@ -70,6 +70,7 @@
     <Compile Include="Assets\Scripts\Gun\Shell.cs" />
     <Compile Include="Assets\Scripts\Map\MapGenerator.cs" />
     <Compile Include="Assets\Scripts\Map\Utility.cs" />
+    <Compile Include="Assets\Scripts\Player\FieldOfView.cs" />
     <Compile Include="Assets\Scripts\Player\Player.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerController.cs" />
     <Compile Include="Assets\Scripts\Utils\GameUI.cs" />

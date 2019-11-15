@@ -589,10 +589,13 @@ MonoBehaviour:
   - {fileID: 6119244933453882447}
   projectile: {fileID: 8297076463618756117, guid: 13a394e2180d45e49987222d711cb53a,
     type: 3}
-  msBetweenShots: 100
+  msBetweenShots: 1000
   muzzleVelocity: 35
   shell: {fileID: 5287810094710287305, guid: 43a508102438b8d4f8fb68a56df8ee55, type: 3}
   shellEjection: {fileID: 1547380991}
+  viewAngle: 80
+  FOVcoef: 15
+  viewRadius: 8
 --- !u!114 &1362471289643647718
 MonoBehaviour:
   m_ObjectHideFlags: 0

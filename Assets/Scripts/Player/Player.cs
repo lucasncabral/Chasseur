@@ -2,6 +2,7 @@
 using System.Collections;
 
 [RequireComponent (typeof (PlayerController))]
+[RequireComponent(typeof(FieldOfView))]
 [RequireComponent(typeof(GunController))]
 public class Player : MonoBehaviour {
 
@@ -10,11 +11,14 @@ public class Player : MonoBehaviour {
 	Camera viewCamera;
 	PlayerController controller;
     GunController gunController;
+    FieldOfView playerFOV;
     public bool aiming;
 
     //public override void Start () {
     void Start()
-    {   controller = GetComponent<PlayerController> ();
+    {
+        playerFOV = GetComponent<FieldOfView>();
+        controller = GetComponent<PlayerController> ();
         gunController = GetComponent<GunController>();
         viewCamera = Camera.main;
         aiming = false;
@@ -42,6 +46,7 @@ public class Player : MonoBehaviour {
             {
                 controller.LookAt(transform.position + moveVelocity);
             }
+            
 		}
 
         // Weapon input
@@ -60,11 +65,13 @@ public class Player : MonoBehaviour {
         if (Input.GetMouseButtonDown(1))
         {
             aiming = true;
+            playerFOV.isAiming();
         }
 
         if (Input.GetMouseButtonUp(1))
         {
             aiming = false;
+            playerFOV.stopAiming();
         }
     }
 }

@@ -21,6 +21,12 @@ public class Gun : MonoBehaviour
     public Transform shellEjection;
     MuzzleFlash muzzleflash;
 
+    public float viewAngle;
+    public float FOVcoef;
+    public float viewRadius;
+    float currentAngle;
+    float precision = 1.5f;
+
     void Start()
     {
         muzzleflash = GetComponent<MuzzleFlash>();
@@ -50,7 +56,18 @@ public class Gun : MonoBehaviour
             for (int i = 0; i < projectileSpawn.Length; i++)
             {
                 nextShotTime = Time.time + msBetweenShots / 1000;
-                Projectile newProjectile = Instantiate(projectile, projectileSpawn[i].position, projectileSpawn[i].rotation) as Projectile;
+
+                Quaternion direction = projectileSpawn[i].rotation;
+                
+                if (currentAngle > 1f) {
+                    currentAngle = currentAngle / precision;
+                    float random = (Random.Range(-currentAngle, currentAngle) / 100);
+                    //float random = 0.25f;
+                    direction.y = direction.y + random;
+                    Debug.Log(direction);
+                }
+
+                Projectile newProjectile = Instantiate(projectile, projectileSpawn[i].position, direction) as Projectile;
                 newProjectile.SetSpeed(muzzleVelocity);
             }
 
@@ -59,14 +76,16 @@ public class Gun : MonoBehaviour
         }
     }
 
-    public void OnTriggerHold()
+    public void OnTriggerHold(float viewAngle)
     {
+        currentAngle = viewAngle;
         Shoot();
         triggerReleasedSinceLastShot = false;
     }
 
     public void OnTriggerRelease()
     {
+        currentAngle = 0;
         triggerReleasedSinceLastShot = true;
         shotsRemainingInBurst = burstCount;
     }
